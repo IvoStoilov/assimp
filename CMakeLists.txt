@@ -57,7 +57,7 @@ PROJECT( Assimp VERSION 5.0.1 )
 
 OPTION( BUILD_SHARED_LIBS
   "Build package with shared libraries."
-  ON
+  OFF
 )
 
 OPTION( ASSIMP_BUILD_FRAMEWORK
@@ -82,11 +82,11 @@ OPTION( ASSIMP_NO_EXPORT
 )
 OPTION( ASSIMP_BUILD_ZLIB
   "Build your own zlib"
-  OFF
+  ON
 )
 OPTION( ASSIMP_BUILD_ASSIMP_TOOLS
   "If the supplementary tools for Assimp are built in addition to the library."
-  ON
+  OFF
 )
 OPTION ( ASSIMP_BUILD_SAMPLES
   "If the official samples are built as well (needs Glut)."
@@ -94,7 +94,7 @@ OPTION ( ASSIMP_BUILD_SAMPLES
 )
 OPTION ( ASSIMP_BUILD_TESTS
   "If the test suite for Assimp is built in addition to the library."
-  ON
+  OFF
 )
 OPTION ( ASSIMP_COVERALLS
   "Enable this to measure test coverage."
@@ -133,12 +133,6 @@ OPTION ( ASSIMP_IGNORE_GIT_HASH
    "Don't call git to get the hash."
    OFF
 )
-
-IF ( WIN32 )
-    OPTION ( ASSIMP_BUILD_ASSIMP_VIEW 
-      "If the Assimp view tool is built. (requires DirectX)" 
-      OFF )
-ENDIF()
 
 IF (IOS AND NOT ASSIMP_HUNTER_ENABLED)
   IF (NOT CMAKE_BUILD_TYPE)
@@ -518,19 +512,19 @@ ENDIF()
 SET ( ASSIMP_BUILD_ARCHITECTURE "" CACHE STRING
   "describe the current architecture."
 )
-IF( ASSIMP_BUILD_ARCHITECTURE STREQUAL "")
-ELSE()
+IF    ( ASSIMP_BUILD_ARCHITECTURE STREQUAL "")
+ELSE  ()
   ADD_DEFINITIONS ( -D'ASSIMP_BUILD_ARCHITECTURE="${ASSIMP_BUILD_ARCHITECTURE}"' )
-ENDIF()
+ENDIF ()
 
 # ${CMAKE_GENERATOR}
 SET ( ASSIMP_BUILD_COMPILER "" CACHE STRING
   "describe the current compiler."
 )
-IF( ASSIMP_BUILD_COMPILER STREQUAL "")
-ELSE()
+IF    ( ASSIMP_BUILD_COMPILER STREQUAL "")
+ELSE  ()
   ADD_DEFINITIONS ( -D'ASSIMP_BUILD_COMPILER="${ASSIMP_BUILD_COMPILER}"' )
-ENDIF()
+ENDIF ()
 
 MARK_AS_ADVANCED ( ASSIMP_BUILD_ARCHITECTURE ASSIMP_BUILD_COMPILER )
 
